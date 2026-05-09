@@ -1,3 +1,5 @@
+<table align="center"><tr><td><img width="128" height="128" alt="icon_128x128" src="https://github.com/user-attachments/assets/f558443c-e186-40c8-a788-522f44c67f7b" /></td></tr></table>
+
 # DNSCryptGUI-OSX 💻
 
 A native SwiftUI menu bar + window app for managing [`dnscrypt-proxy`](https://github.com/DNSCrypt/dnscrypt-proxy) on Apple Macs 🍎.
@@ -14,6 +16,7 @@ A native SwiftUI menu bar + window app for managing [`dnscrypt-proxy`](https://g
 - Set system DNS to 127.0.0.1 or ::1 on the active network service (with admin auth)
 - Launch GUI at login (SMAppService, macOS 13+)
 - Connection status: resolves `whoami.cloudflare` etc. to confirm DNS is actually going through the proxy
+- Coming soon to the AppStore
 
 ## Architecture 📂
 
