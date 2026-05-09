@@ -1,4 +1,10 @@
-# Security Policy
+## Application Based Countermeasures 
+
+Both the DNSCryptGUIHelper and the DNSCryptGUI.app binaries are cryptographically signed by the Apple Developer ID certificate. The Helper is locked down to only allow a specific co-signed GUI to interact with it. In Addition to this, the Helper utilises the SMAppService status for a read-only view of the current registration / authorization state of the executable (Launch Daemon). 
+
+The Helper never calls the register() function and never force-opens the system settings, this is and should remain under full control of the user. Non-privileged features run through the GUI and are passed to the OS, anything that requires root is proxied through to the Helper over for seperation, as that runs as root.
+
+## Security Policy
 
 I will continue to audit the code when possible before each release, for now, feel free to raise any potential issues you notice.
 
@@ -8,8 +14,9 @@ Feature and security updates will continue to be released indefinatly with suppo
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 2.0.x   | :x:                |
+| 2.0.x   | n/a                |
 | 1.0.x   | :white_check_mark: |
+| 0.1.x.  | :x:                |
 
 ## Reporting a Vulnerability
 
