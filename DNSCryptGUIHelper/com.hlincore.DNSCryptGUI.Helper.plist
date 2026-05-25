@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!--
+        launchd plist for the DNSCryptGUI privileged helper.
+
+        This file is embedded inside the app bundle at
+            Contents/Library/LaunchDaemons/com.hlincore.DNSCryptGUI.Helper.plist
+        SMAppService.daemon(plistName:) reads it from there and installs
+        it into /Library/LaunchDaemons/ on register().
+    -->
+    <key>Label</key>
+    <string>com.hlincore.DNSCryptGUI.Helper</string>
+
+    <!--
+        launchd execs this binary. Path is relative to the app bundle root.
+        We ship the helper alongside this plist under
+            Contents/Library/LaunchDaemons/
+        so BundleProgram points to that same directory. If you ever move
+        the binary to Contents/MacOS/, update this key to match.
+    -->
+    <key>BundleProgram</key>
+    <string>Contents/Library/LaunchDaemons/DNSCryptGUIHelper</string>
+
+    <!--
+        Advertise a mach service. Because MachServices is set and RunAtLoad
+        is false (the default), launchd spawns the helper on-demand when
+        the GUI first makes an XPC connection to this name.
+    -->
+    <key>MachServices</key>
+    <dict>
+        <key>com.hlincore.DNSCryptGUI.Helper</key>
+        <true/>
+    </dict>
+
+    <!-- Run as root. DNS + service control both need it. -->
+    <key>UserName</key>
+    <string>root</string>
+
+    <!-- Exit after 60s of idleness; launchd will re-spawn on next XPC use. -->
+    <key>ExitTimeOut</key>
+    <integer>60</integer>
+
+    <!--
+        Standard output/error to the unified log via launchd. View with:
+            log show --predicate 'subsystem == "com.hlincore.DNSCryptGUI.Helper"' --last 10m
+    -->
+    <key>StandardOutPath</key>
+    <string>/var/log/DNSCryptGUIHelper.log</string>
+    <key>StandardErrorPath</key>
+    <string>/var/log/DNSCryptGUIHelper.log</string>
+
+    <key>ProcessType</key>
+    <string>Interactive</string>
+</dict>
+</plist>
